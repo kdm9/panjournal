@@ -1,0 +1,137 @@
+\documentclass[9pt,a4paper]{extarticle}
+\usepackage{f1000_styles}
+\usepackage{authblk}
+
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+
+$if(biblatex)$
+\usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
+$if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+\usepackage{hyperref}
+$if(colorlinks)$
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+$endif$
+\hypersetup{unicode=true,
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+
+$if(listings)$
+\usepackage{listings}
+$endif$
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+
+$for(author)$
+\author$if(author.symb)$[$author.symb$]$endif${$author.name$}
+$if(author.affil)$
+ \affil$if(author.symb)$[$author.symb$]$endif${$author.affil$}
+$endif$
+$endfor$
+
+\date{$date$}
+
+\begin{document}
+\pagestyle{front}
+\thispagestyle{front}
+$if(title)$
+\maketitle
+$endif$
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+\clearpage
+\pagestyle{main}
+
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$if(toc)$
+{
+$if(colorlinks)$
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+$endif$
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
