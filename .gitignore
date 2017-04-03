@@ -89,9 +89,6 @@ acs-*.bib
 
 # knitr
 *-concordance.tex
-# TODO Comment the next line if you want to keep your tikz graphics files
-*.tikz
-*-tikzDictionary
 
 # listings
 *.lol
@@ -162,19 +159,8 @@ pythontex-files-*/
 *.ttt
 *.fff
 
-# Latexian
-TSWLatexianTemp*
-
 ## Editors:
-# WinEdt
 *.bak
 *.sav
 
-# Texpad
-.texpadtmp
-
-# Kile
-*.backup
-
-# KBibTeX
-*~[0-9]*
+*.pdf
